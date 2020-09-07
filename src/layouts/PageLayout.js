@@ -30,26 +30,42 @@ export const PageLayout = ({ children }) => {
         <Header id='layout__body-header'>
           <Logo id='layout__body-header-logo' />
           <Links>
-            <Link id='layout__body-header-link' href='https://github.com'>
+            <Link
+              id='layout__body-header-link'
+              href='https://github.com/Edisonsan'
+            >
               Github
             </Link>
-            <Link id='layout__body-header-link' href='https://linkedin.com'>
+            <Link
+              id='layout__body-header-link'
+              href='https://linkedin.com/in/sanchezedison'
+            >
               LinkedIn
             </Link>
           </Links>
         </Header>
         <Card id='layout__body-card'>
           <SocialBar id='layout__body-card-social'>
-            <ButtonIcon>
+            <ButtonIcon
+              onClick={() =>
+                window.open('https://linkedin.com/in/sanchezedison')
+              }
+            >
               <FaLinkedin />
             </ButtonIcon>
-            <ButtonIcon>
+            <ButtonIcon
+              onClick={() => window.open('mailto://sanchez.edison@gmail.com')}
+            >
               <FaEnvelopeOpenText />
             </ButtonIcon>
-            <ButtonIcon>
+            <ButtonIcon
+              onClick={() => window.open('https://github.com/Edisonsan')}
+            >
               <FaGithub />
             </ButtonIcon>
-            <ButtonIcon>
+            <ButtonIcon
+              onClick={() => window.open('https://www.twitter.com/Edisonsan')}
+            >
               <FaTwitter />
             </ButtonIcon>
           </SocialBar>

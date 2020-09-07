@@ -102,7 +102,7 @@ export const Counter = () => {
         </ContainerPlay>
         <Link onClick={() => clearWatch()}>Reset Timer</Link>
       </FooterLeft>
-      <Version>Version 1.0 - Sep 1, 2020</Version>
+      <Version>Version 1.2 - Sep 1, 2020</Version>
     </Container>
   );
 };
