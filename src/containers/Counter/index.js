@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import Card from '../../components/Card';
 import {
@@ -15,69 +16,68 @@ import {
 
 export const Counter = () => {
   const [play, setPlay] = React.useState(false);
-  const [value, setValue] = React.useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
+  const [timer, setTimer] = React.useState(null);
+  const [value, setValue] = React.useState();
 
-  const addSecond = async () => {
-    console.log('addsecond, play: ', play);
-    if (!play) return;
-
-    let temp = {
-      days: value.days,
-      hours: value.hours,
-      minutes: value.minutes,
-      seconds: value.seconds,
-    };
-
-    let inc_minute = value.seconds === 59 ? true : false;
-    let inc_hour = value.minutes === 59 ? true : false;
-    let inc_day = value.hours === 23 ? true : false;
-
-    temp.seconds = inc_minute ? 0 : value.seconds + 1;
-    temp.minutes = inc_minute ? value.minutes + 1 : value.minutes;
-    temp.hours = inc_hour ? value.hours + 1 : value.hours;
-    temp.days = inc_day ? value.days + 1 : value.days;
-
-    setValue(temp);
-    await startWatch();
-  };
-
-  const startWatch = async () => {
-    console.log('StartWatch, play: ', play);
-
-    if (play) {
-      setTimeout(() => addSecond(), 1000);
-    }
-  };
-
+  //Handle Change button Play
   React.useEffect(() => {
-    console.log('useEffect, play', play);
-
     if (play) {
-      console.log('Effect On');
       startWatch();
     } else {
-      console.log('Effect Off');
+      clearTimeout(timer);
     }
+
+    return () => null;
   }, [play]);
 
-  const clearWatch = () => {
-    // javascript statement here
-    setValue({
-      days: 0,
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
-    });
+  //Handle Change Value
+  React.useEffect(() => {
+    const onEffect = () => {
+      console.log(value);
+      if (value === undefined) {
+        return;
+      }
+      startWatch();
+    };
+    onEffect();
+
+    return () => null;
+  }, [value]);
+
+  //
+  const addSecond = async () => {
+    let temp = {
+      days: value?.days ?? 0,
+      hours: value?.hours ?? 0,
+      minutes: value?.minutes ?? 0,
+      seconds: value?.seconds ?? 0,
+    };
+
+    let inc_minute = temp.seconds === 59;
+    let inc_hour = temp.minutes === 59;
+    let inc_day = temp.hours === 23;
+
+    temp.seconds = inc_minute ? 0 : temp.seconds + 1;
+    temp.minutes = inc_minute ? temp.minutes + 1 : temp.minutes;
+    temp.hours = inc_hour ? temp.hours + 1 : temp.hours;
+    temp.days = inc_day ? temp.days + 1 : temp.days;
+
+    setValue(temp);
+    clearTimeout(timer);
   };
 
-  const handlePlay = async () => {
-    console.log('HandlePlay: ', play);
+  const startWatch = () => {
+    const _timer = setTimeout(() => addSecond(), 1000);
+    setTimer(_timer);
+  };
 
+  const clearWatch = () => {
+    if (play) setPlay(false);
+
+    setValue();
+  };
+
+  const handlePlay = () => {
     if (play) {
       setPlay(false);
     } else {
@@ -89,10 +89,10 @@ export const Counter = () => {
     <Container>
       <Title>Timer - Edison</Title>
       <CardsContainer>
-        <Card label='Days' value={value?.days} />
-        <Card label='Hours' value={value?.hours} />
-        <Card label='Minutes' value={value?.minutes} />
-        <Card label='Seconds' value={value?.seconds} />
+        <Card label='Days' value={value?.days ?? 0} />
+        <Card label='Hours' value={value?.hours ?? 0} />
+        <Card label='Minutes' value={value?.minutes ?? 0} />
+        <Card label='Seconds' value={value?.seconds ?? 0} />
       </CardsContainer>
       <FooterLeft>
         <ContainerPlay>
@@ -100,7 +100,7 @@ export const Counter = () => {
             {!!play ? <IconPause /> : <IconPlay />}
           </Play>
         </ContainerPlay>
-        <Link>Reset Timer</Link>
+        <Link onClick={() => clearWatch()}>Reset Timer</Link>
       </FooterLeft>
       <Version>Version 1.0 - Sep 1, 2020</Version>
     </Container>

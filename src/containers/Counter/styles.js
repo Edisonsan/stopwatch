@@ -52,7 +52,7 @@ export const Link = styled.button`
 
 export const ContainerPlay = styled.div`
   position: absolute;
-  top: -4.5vw;
+  top: -5vh;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -62,6 +62,8 @@ export const ContainerPlay = styled.div`
 export const Play = styled.button`
   width: 7vw;
   height: 7vw;
+  max-width: 60px;
+  max-height: 60px;
   border-radius: 50%;
   border-color: transparent;
   background-color: #353f49;

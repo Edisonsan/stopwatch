@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const Container = styled.div`
   height: 12vw;
   width: 12vw;
+  max-width: 120px;
+  max-height: 120px;
   background-color: white;
   margin: 1vw 1vw;
   border-radius: 5px;
