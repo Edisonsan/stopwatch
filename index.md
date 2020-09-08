@@ -1,12 +1,13 @@
-## Welcome to GitHub Pages
+## STOPWATCH
 
-You can use the [editor on GitHub](https://github.com/Edisonsan/stopwatch/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+by Edison Sanchez [LinkedIn](https://linkedin.com/in/sanchezedison).
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Just testing React with Styled components and Hooks.
 
-### Markdown
+### App
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+This App is just a stopwatch with 3 interactions: Play, Pause, and Reset; Links for Github, LinkedIn, Twitter, and Mail.
+
 
 ```markdown
 Syntax highlighted code block
